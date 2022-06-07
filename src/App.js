@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import {useDispatch,useSelector} from 'react-redux'
+import { inc,dec,mul1,div1,sub1,add1 } from './action';
+import {useState} from 'react'
 function App() {
+  const dispatch = useDispatch();
+  const count =useSelector((state)=>state.count)
+  // const x=useSelector((state)=>state.x)
+  const [x,setx] = useState("")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <h1>counter:{count}</h1>
+    <input type="number" value={x} onChange={e=>setx(e.target.value)}/>
     </div>
+
+<button onClick={()=>dispatch(inc())}>-</button>
+<button onClick={()=>dispatch(dec())}>+</button>
+<button onClick={()=>dispatch(add1(x))}>Add</button>
+<button onClick={()=>dispatch(sub1(x))}>Sub</button>
+<button onClick={()=>dispatch(mul1(x))}>mul</button>
+<button onClick={()=>dispatch(div1(x))}>div</button>
+</div>
   );
 }
 
